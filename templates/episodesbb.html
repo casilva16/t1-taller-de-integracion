@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: rgba(53, 52, 51, 0.938);
+}
+
+h1, h2 {
+  color: rgb(81, 152, 161);
+  margin-left: 40px;
+  text-align: center;
+} 
+
+p, ul, li  {
+    color:rgb(81, 152, 161);
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Breaking Bad y Better Call Saul API</h2>
+
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Buscar personajes...">
+</form>
+
+<h2>Breaking Bad</h2>
+<h2>Temporada {{ n }}</h2>
+{% for episode in season %}
+<li><a href="{%url 'episode_bcs' episode.episode_id %}">{{ episode.title }}</a></li>
+{% endfor %}
+
+
+
+</body>
+</html>

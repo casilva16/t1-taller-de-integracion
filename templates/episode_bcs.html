@@ -32,7 +32,6 @@ p, ul, li  {
 {% for persona  in personas %}
 {% if persona.name == personaje %}
 <li><a href="{%url 'character' persona.char_id %}">{{ persona.name }}></a></li>
-<p>{{ persona.name }}</p>
 {% endif %}
 {% endfor %}
 {% endfor %}
