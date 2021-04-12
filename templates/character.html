@@ -35,11 +35,11 @@ p, ul, li  {
 <p><strong>Estado: </strong> {{ personaje.status }}</p>
 <p><strong>Sobrenombre: </strong> {{ personaje.nickname }}</p>
 
-<p><strong>Apariciones Breaking Bad:</strong> {{ personaje.appearance }}</p>
+<p><strong>Apariciones Breaking Bad:</strong></p>
 {% for temp in personaje.appearance %}
 <p><li><a href="{%url 'episodesbb' temp %}">{{ temp }}</a></li></p>
 {% endfor %}
-<p><strong>Apariciones Better Call Saul</strong> {{ personaje.better_call_saul_appearance }}</p>
+<p><strong>Apariciones Better Call Saul:</strong></p>
 {% for tempbcs in personaje.better_call_saul_appearance %}
 <p><li><a href="{%url 'episodesbcs' tempbcs %}">{{ tempbcs }}</a></li></p>
 {% endfor %}
