@@ -14,11 +14,15 @@ h1 {
     font-size: 300%;
 } 
 
-p, ul, li, h2  {
+p, li, h2  {
    color:rgb(255, 255, 255);
    text-align: center;
    font-family: Verdana, Geneva, Tahoma, sans-serif;
    font-size: 100%;
+}
+
+ul {
+   list-style-type: none;
 }
 
 a:link { color: white; text-decoration: none}
@@ -46,7 +50,9 @@ a:link { color: white; text-decoration: none}
 <body>
    <h1>Resultados de Búsqueda</h1>
    {% for char in personajes %}
+   <ul>
    <li><a href="{%url 'character' char.char_id %}">{{ char.name }}</a></li>
+   </ul>
    {% endfor %}
 
 </body>
