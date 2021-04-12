@@ -6,20 +6,42 @@ body {
   background-color: rgba(10, 10, 10, 0.938);
 }
 
-h1, h2 {
-  color: rgb(81, 152, 161);
-  margin-left: 40px;
-  text-align: center;
+h1 {
+    color: rgb(30, 211, 172);
+    margin-left: 40px;
+    text-align: center;
+    font-family: impact;
+    font-size: 300%;
 } 
 
-p, ul, li  {
-    color:rgb(81, 152, 161);
+p, ul, li, h2  {
+   color:rgb(255, 255, 255);
+   text-align: center;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-size: 100%;
+}
+
+a:link { color: white; text-decoration: none}
+      a:visited { color: white; text-decoration: none}
+      a:hover { color: rgb(30, 211, 172); text-decoration: none}
+      a:active { color: white; text-decoration: none}
+
+
+.myDiv {
+    color: rgb(30, 211, 172);
     text-align: center;
+    margin-top: 0%;
+    margin-left: 0%;
+    width: 10%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 200%;
 }
 
 </style>
 </head>
-<a href="{%url 'index' %}">Home</a>
+<div class="myDiv">
+  <a href="{%url 'index' %}">Home</a>
+</div>
  
 <body>
    <h1>Resultados de Búsqueda</h1>

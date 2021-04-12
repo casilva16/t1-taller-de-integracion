@@ -5,7 +5,7 @@ import requests
 
 def index(request):
     rango = [1, 2, 3, 4, 5]
-    rango2 = [1, 2, 3, 4, 6]
+    rango2 = [1, 2, 3, 4, 5, 6]
 
     ctx2 = {'range': rango, 'range2': rango2}
     return render(request, 'index.html', ctx2)
@@ -33,7 +33,8 @@ def episodesbb(request, i):
 def episodesbcs(request, j): 
     response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Better+Call+Saul')
     databcs = response.json()
-    s1bcs, s2bcs, s3bcs, s4bcs, s6bcs = make_seasons(databcs, False)
+    #print(databcs)
+    s1bcs, s2bcs, s3bcs, s4bcs, s5bcs, s6bcs = make_seasons(databcs, False)
     
     if int(j) == 1:
         ctx = {'seasonbcs': s1bcs, 'c': 1}
@@ -43,6 +44,8 @@ def episodesbcs(request, j):
         ctx = {'seasonbcs': s3bcs, 'c': 3}   
     elif int(j)  == 4:
         ctx = {'seasonbcs': s4bcs, 'c': 4}
+    elif int(j)  == 5:
+        ctx = {'seasonbcs': s5bcs, 'c': 5}
     else:
         ctx = {'seasonbcs': s6bcs, 'c': 6}
     
@@ -54,8 +57,6 @@ def episode_bcs(request, episode_id):
     data = response.json()
     episode = data[0]
     
-    #response2 = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/characters/')
-    #personas = response2.json()
     personas = all_chars()
     ctx = {'episode': episode, 'personas': personas}
     return render(request, 'episode_bcs.html', ctx)
@@ -83,7 +84,7 @@ def search_results(request): # recibe letra o nombre
     data = all_chars()
     personajes = []
     for personaje in data:
-        if word in personaje['name'].lower():
+        if word.lower() in personaje['name'].lower():
             personajes.append(personaje)
     ctx = {'personajes': personajes}
     return render(request, 'search_results.html', ctx)
@@ -99,14 +100,14 @@ def make_seasons(data, valor):
 
 
     else:# es bcs
-        seasons = [[] for i in range(5)]
+        seasons = [[] for i in range(6)]
         for i in data:
-            if i['season'] == '6':
-                seasons[4].append(i)
-            else:
-                temp = int(i['season']) - 1
-                seasons[temp].append(i)
-        return seasons[0], seasons[1], seasons[2], seasons[3], seasons[4]
+            #if i['season'] == '6':
+            #    seasons[4].append(i)
+            #else:
+            temp = int(i['season']) - 1
+            seasons[temp].append(i)
+        return seasons[0], seasons[1], seasons[2], seasons[3], seasons[4], seasons[5]
 
 
 def all_chars():

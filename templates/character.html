@@ -3,19 +3,27 @@
 <head>
 <style>
 body {
-    background-color: rgba(53, 52, 51, 0.938);
+    background-color: rgba(10, 10, 10, 0.938);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h1 {
-    color: rgb(81, 152, 161);
+    color: rgb(30, 211, 172);
     margin-left: 40px;
     text-align: center;
+    font-family: impact;
+    font-size: 300%;
 } 
 
 p, ul, li  {
-    color:rgb(81, 152, 161);
+    color:rgb(255, 255, 255);
     text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+ul{
+    list-style-type: none;
+  }
 
 .center {
   display: block;
@@ -24,15 +32,81 @@ p, ul, li  {
   width: 50%;
 }
 
+a:link { color: white; text-decoration: none}
+      a:visited { color: white; text-decoration: none}
+      a:hover { color: rgb(30, 211, 172); text-decoration: none}
+      a:active { color: white; text-decoration: none}
+
+.myDiv {
+    color: rgb(30, 211, 172);
+    text-align: center;
+    margin-top: 0%;
+    margin-left: 0%;
+    width: 10%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 200%;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid rgb(30, 211, 172);
+  border-right: none;
+  padding: 10px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: rgba(255, 255, 255, 0.938);
+}
+
+.searchTerm:focus{
+  color: rgb(0, 0, 0);
+}
+
+.searchButton {
+  width: 75px;
+  height: 36px;
+  border: 1px solid rgb(30, 211, 172);
+  background: rgb(30, 211, 172);
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 15%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+}
 
 </style>
 </head>
-<a href="{%url 'index' %}">Home</a>
-<form action="{% url 'search_results' %}" method="get">
-    <input id="search_box" type="text" name='search_box' placeholder="Buscar personajes...">
-    <button id="search_submit" type="submit" >Buscar</button>
-</form>
-  
+
+<div class="myDiv">
+    <a href="{%url 'index' %}">Home</a>
+</div>
+
+<div class="wrap">
+    <div class="search">
+        <form action="{% url 'search_results' %}" method="get">
+            <input id="search_box" type="text" name='search_box' class="searchTerm" placeholder="Buscar personajes...">
+            <button id="search_submit" type="submit" class="searchButton">Buscar</button>
+                <i class="fa fa-search"></i>
+        </form>
+    </div>
+</div>
+
+
 <h1>Nombre: <strong>{{ personaje.name }}</strong></h1>
 <img src={{personaje.img}} alt="Imagen"+{{personaje.name }} style="width:250px;height:250px;" class="center">
 <p>Id: <strong>{{ personaje.char_id }}</strong></p>
