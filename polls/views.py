@@ -4,19 +4,9 @@ import requests
 
 
 def index(request):
-    response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Better+Call+Saul')
-    databcs = response.json()
-
-    response2 = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/episodes?series=Breaking+Bad')
-    databb = response2.json()
-
-    s1bb, s2bb, s3bb, s4bb, s5bb  = make_seasons(databb, True)
-    s1bcs, s2bcs, s3bcs, s4bcs, s6bcs = make_seasons(databcs, False)
     rango = [1, 2, 3, 4, 5]
     rango2 = [1, 2, 3, 4, 6]
-    #ctx = {'s1': s1bcs, 's2': s2bcs, 's3': s3bcs, 's4': s4bcs, 's6': s6bcs,
-    #'s1bb': s1bb, 's2bb': s2bb, 's3bb': s3bb, 's4bb': s4bb, 's5bb': s5bb, 'range': range(5)
-    #}
+
     ctx2 = {'range': rango, 'range2': rango2}
     return render(request, 'index.html', ctx2)
     
@@ -53,7 +43,7 @@ def episodesbcs(request, j):
         ctx = {'seasonbcs': s3bcs, 'c': 3}   
     elif int(j)  == 4:
         ctx = {'seasonbcs': s4bcs, 'c': 4}
-    elif int(j) == 5:
+    else:
         ctx = {'seasonbcs': s6bcs, 'c': 6}
     
     return render(request, 'episodesbcs.html', ctx)
@@ -64,8 +54,9 @@ def episode_bcs(request, episode_id):
     data = response.json()
     episode = data[0]
     
-    response2 = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/characters/')
-    personas = response2.json()
+    #response2 = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/characters/')
+    #personas = response2.json()
+    personas = all_chars()
     ctx = {'episode': episode, 'personas': personas}
     return render(request, 'episode_bcs.html', ctx)
 
@@ -85,14 +76,17 @@ def character(request, char_id):
     return render(request, 'character.html', ctx)
 
 
-def search_results(request, name): # recibe letra o nombre
-    responde = response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/characters/')
-    data = response.json()
-
+def search_results(request): # recibe letra o nombre
+    if request.method == 'GET': # If the form is submitted
+        word = request.GET.get('search_box', None)
+    
+    data = all_chars()
+    personajes = []
     for personaje in data:
-        if name in personaje.name:
-            ctx = {'personaje': personaje}
-            return render(request, 'search_results.html', ctx)
+        if word in personaje['name'].lower():
+            personajes.append(personaje)
+    ctx = {'personajes': personajes}
+    return render(request, 'search_results.html', ctx)
 
 
 def make_seasons(data, valor):
@@ -114,6 +108,22 @@ def make_seasons(data, valor):
                 seasons[temp].append(i)
         return seasons[0], seasons[1], seasons[2], seasons[3], seasons[4]
 
-        
+
+def all_chars():
+    personajes = []
+    offset = 0
+    continuar = True
+
+    while continuar:
+        response = requests.get('https://tarea-1-breaking-bad.herokuapp.com/api/characters?limit=10&offset='+str(offset))
+        data = response.json()
+        if len(data) == 0:
+            continuar = False
+        else:
+            for i in data:
+                personajes.append(i)
+            offset += 10
+
+    return personajes
 
     

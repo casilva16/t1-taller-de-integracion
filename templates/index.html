@@ -45,7 +45,8 @@ h2, li {
 <h2>Breaking Bad y Better Call Saul API</h2>
 
 <form action="{% url 'search_results' %}" method="get">
-  <input name="q" type="text" placeholder="Buscar personajes...">
+  <input id="search_box" type="text" name='search_box' placeholder="Buscar personajes...">
+  <button id="search_submit" type="submit" >Buscar</button>
 </form>
 
 <div class="row">

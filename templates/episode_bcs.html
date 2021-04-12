@@ -19,6 +19,12 @@ p, ul, li  {
 
 </style>
 </head>
+<a href="{%url 'index' %}">Home</a>
+<form action="{% url 'search_results' %}" method="get">
+  <input id="search_box" type="text" name='search_box' placeholder="Buscar personajes...">
+  <button id="search_submit" type="submit" >Buscar</button>
+</form>
+
 <body>
 <h1>Titulo: <strong>{{ episode.title }}</strong></h1>
 <p><strong>Serie: </strong> {{ episode.series }}</p>

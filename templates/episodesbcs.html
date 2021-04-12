@@ -19,12 +19,13 @@ p, ul, li  {
 
 </style>
 </head>
+<a href="{%url 'index' %}">Home</a>
 <body>
-
 <h2>Breaking Bad y Better Call Saul API</h2>
 
 <form action="{% url 'search_results' %}" method="get">
-  <input name="q" type="text" placeholder="Buscar personajes...">
+  <input id="search_box" type="text" name='search_box' placeholder="Buscar personajes...">
+  <button id="search_submit" type="submit" >Buscar</button>
 </form>
 
 <h2>Better Call Saul</h2>

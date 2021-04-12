@@ -27,6 +27,12 @@ p, ul, li  {
 
 </style>
 </head>
+<a href="{%url 'index' %}">Home</a>
+<form action="{% url 'search_results' %}" method="get">
+    <input id="search_box" type="text" name='search_box' placeholder="Buscar personajes...">
+    <button id="search_submit" type="submit" >Buscar</button>
+</form>
+  
 <h1>Nombre: <strong>{{ personaje.name }}</strong></h1>
 <img src={{personaje.img}} alt="Imagen"+{{personaje.name }} style="width:250px;height:250px;" class="center">
 <p>Id: <strong>{{ personaje.char_id }}</strong></p>

@@ -1,3 +1,31 @@
+<!DOCTYPE html>
 <html>
-   <h1>HOLAHOLA</h1> 
+<head>
+<style>
+body {
+  background-color: rgba(10, 10, 10, 0.938);
+}
+
+h1, h2 {
+  color: rgb(81, 152, 161);
+  margin-left: 40px;
+  text-align: center;
+} 
+
+p, ul, li  {
+    color:rgb(81, 152, 161);
+    text-align: center;
+}
+
+</style>
+</head>
+<a href="{%url 'index' %}">Home</a>
+ 
+<body>
+   <h1>Resultados de Búsqueda</h1>
+   {% for char in personajes %}
+   <li><a href="{%url 'character' char.char_id %}">{{ char.name }}</a></li>
+   {% endfor %}
+
+</body>
 </html>
